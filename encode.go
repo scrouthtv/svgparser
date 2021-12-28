@@ -25,7 +25,7 @@ func (e *Element) write(enc *xml.Encoder) error {
 		return err
 	}
 
-	if e.Content != nil {
+	if e.Content != "" {
 		err = enc.EncodeToken(xml.CharData([]byte(e.Content)))
 		if err != nil {
 			return err
@@ -39,7 +39,7 @@ func (e *Element) write(enc *xml.Encoder) error {
 		}
 	}
 
-	return e.EncodeToken(xml.EndElement{
+	return enc.EncodeToken(xml.EndElement{
 		Name: e.Name,
 	})
 }
